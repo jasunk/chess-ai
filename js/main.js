@@ -129,16 +129,22 @@ var pstSelf = { w: pst_w, b: pst_b };
  * Evaluates the board at this point in time,
  * using the material weights and piece square tables.
  */
+let gameOver=false
 function evaluateBoard(game, move, prevSum, color) {
 
   if (game.in_checkmate()) {
 
     // Opponent is in checkmate (good for us)
     if (move.color === color) {
+      
+      
       return 10 ** 10;
     }
     // Our king's in checkmate (bad for us)
     else {
+      
+      
+      
       return -(10 ** 10);
     }
   }
@@ -316,6 +322,12 @@ function minimax(game, depth, alpha, beta, isMaximizingPlayer, sum, color) {
 function checkStatus(color) {
   if (game.in_checkmate()) {
     $('#status').html(`<b>Checkmate!</b> Oops, <b>${color}</b> lost.`);
+    if (!gameOver){
+      alert("EZ DUBS! Sjakk matt", color, "vant")
+      gameOver=true
+      alert("Refresh siden takk, ting fakker seg fra no av")
+      
+    }
   } else if (game.insufficient_material()) {
     $('#status').html(`It's a <b>draw!</b> (Insufficient Material)`);
   } else if (game.in_threefold_repetition()) {
